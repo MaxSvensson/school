@@ -3,16 +3,20 @@ const { route } = require("./user");
 
 const router = express.Router()
 
-router.get('/', function (req, res) {
+router.get('/home', function (req, res) {
     res.render('home');
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", function (req, res) {
     res.render("login")
 })
 
-router.get("/settings", (req, res) => {
+router.get("/settings", function (req, res) {
     res.render('settings')
+})
+
+router.get("/contact", function (req, res) {
+    res.render('contact')
 })
 
 module.exports = router;

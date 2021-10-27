@@ -11,6 +11,7 @@ app.use(express.json());
 app.set('views', __dirname + '/views');
 app.use('/Js', express.static(__dirname + '/public/Js'));
 app.use('/Css', express.static(__dirname + '/public/Css'));
+app.use('/img', express.static(__dirname + '/public/img'));
 
 
 app.engine('handlebars', hbs.engine);
