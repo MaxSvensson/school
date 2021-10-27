@@ -9,7 +9,9 @@ const hbs = exphbs.create({ /* config */ });
 
 app.use(express.json());
 app.set('views', __dirname + '/views');
-app.use('/js', express.static(__dirname + '/public/Js'));
+app.use('/Js', express.static(__dirname + '/public/Js'));
+app.use('/Css', express.static(__dirname + '/public/Css'));
+
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars')
