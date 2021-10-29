@@ -1,21 +1,27 @@
-
-const {OAuth2Client} = require('google-auth-library');
-const client = new OAuth2Client("548185768048-lhm3f4gpepgeq4rv4v331n7aviiansb7");
+const User = require("../DB/models/User");
 
 class UserService {
-    async verifyLoginToken(token) {
+
+    async getUser (id) {
         try {
-            const ticket = await client.verifyIdToken({
-                idToken: token,
-                audience: "548185768048-lhm3f4gpepgeq4rv4v331n7aviiansb7", 
-            });
-            const payload = ticket.getPayload();
-            const userid = payload['sub'];
-            return true
+            let user = User.findOne({googleId:id});
+            return user;
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async setUserLogout (id) {
+        try {
+            let user = await User.findOne({googleId: id});
+            user.currentlyLoggedIn = false
+            await user.save()
+            return user;
         } catch (error) {
             console.log(error)
-            return false
-        }
+            return error;
+        } 
+
     }
 }
 

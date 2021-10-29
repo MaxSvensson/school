@@ -18,7 +18,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     accessToken: String,
-    refreshToken: String
+    refreshToken: String,
+    currentlyLoggedIn: {
+        type: Boolean,
+        default: true,
+    }
 },{
     timestamps:true
 })

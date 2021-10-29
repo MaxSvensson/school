@@ -1,8 +1,9 @@
 const passport = require("passport")
-const mongoose = require("mongoose")
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const User = require("./DB/models/User");
 
+let UserService = require("./services/UserService");
+UserService = new UserService()
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -19,30 +20,22 @@ passport.use(new GoogleStrategy({
         passReqToCallback   : true
     },
     async function(request, accessToken, refreshToken, profile, done) {
-        let user = await User.find({googleId: profile.id});
+        let user = await User.findOne({googleId: profile.id});
         if(user) {
-                user.accessToken = accessToken
-                user.refreshToken = refreshToken
-                return done(null, {
-                        profile,
-                        accessToken: accessToken,
-                        refreshToken: refreshToken
-                     });
+                console.log("Exitst")
+                user.accessToken = accessToken;
+                user.currentlyLoggedIn = true;
+                await user.save()
+                return done(null, profile);
         }
         user = new User({
                 googleId: profile.id,
                 name: `${profile.given_name} ${profile.family_name}`,
                 email: profile.email,
                 accessToken: accessToken,
-                refreshToken: refreshToken
+                currentlyLoggedIn: true
         })
-        user.save(err => {
-             console.log(err)
-             return done(null, {
-                profile,
-                accessToken: accessToken,
-                refreshToken: refreshToken
-             });
-        })
+        await user.save()
+        return done(null, profile);
     }
 ));

@@ -3,24 +3,10 @@ const router = express.Router()
 const passport = require("passport")
 const auth = require("../middleware/auth")
 
-require("../passport")
-
 let UserService = require("../services/UserService");
 UserService = new UserService()
 
-router.post("/login/:token", async (req, res) => {
-    const token = req.params.token
-    console.log(token)
-    try {
-        const isVerified = await UserService.verifyLoginToken(token) 
-        console.log(isVerified)
-        res.sendStatus(200)
-    } catch (error) {
-        res.sendStatus(400)
-    }
-
-})
-
+require("../passport")
 
 router.get("/failed", (req, res) => {
     res.send("Failed")
@@ -51,10 +37,17 @@ router.get('/google/callback',
     }
 );
 
-router.get("/logout", (req, res) => {
-    req.session = null;
-    req.logout();
-    res.redirect("/login");
+router.get("/logout", async (req, res) => {
+    const id = req.user.id
+    if(!id) throw new Error()
+    try {
+        req.session = null;
+        req.logout();
+        await UserService.setUserLogout(id)
+        res.redirect("/login");    
+    } catch (error) {
+        res.redirect("login")
+    }   
 })
 
 module.exports = router;
