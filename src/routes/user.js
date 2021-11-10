@@ -23,7 +23,7 @@ router.get("/login", (req, res) => {
 router.get('/google',
     passport.authenticate('google', {
             scope:
-                ['email', 'profile', 'https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events']
+                ['email', 'profile', 'https://www.googleapis.com/auth/calendar.events.readonly']
         }
     ));
 
