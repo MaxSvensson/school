@@ -1,4 +1,5 @@
 const User = require("../DB/models/User");
+const {google} = require('googleapis'); 
 
 class UserService {
 
@@ -21,6 +22,22 @@ class UserService {
             console.log(error)
             return error;
         } 
+
+    }
+
+    async getWeekEvents(id) {
+
+        try {
+            const user = await this.getUser(id)
+            const calender = google.calendar({
+                auth: user.accessToken,
+                version: 'v3'
+            })
+
+            console.log(calender.acl.get())
+        } catch (error) {
+            
+        }
 
     }
 }

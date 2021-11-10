@@ -6,6 +6,7 @@ const auth = async (req, res, next) => {
         if(!req.user) throw new Error();
         let user = await UserService.getUser(req.user.id);
         if(!user) return res.redirect("/logout")
+        req.user = user;
         return next()
     } catch (error) {
         res.redirect("/login")

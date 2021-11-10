@@ -1,5 +1,6 @@
 const express = require("express")
 const userRoute = require("./routes/user");
+const calenderRoute = require("./routes/calender")
 const pageRoute = require("./routes/pages")
 var exphbs  = require('express-handlebars');
 
@@ -33,6 +34,7 @@ app.set('view engine', 'handlebars')
 app.use("/", userRoute)
 
 app.use(auth)
+app.use("/calender", calenderRoute)
 app.use("/", pageRoute)
 
 
