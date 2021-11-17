@@ -1,5 +1,9 @@
-#main {
-    /* background: url("./img/background.svg"); */
+*{
+  margin: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .circel_background{
@@ -12,10 +16,10 @@
     clip-path: circle(600px at right 800px);
 }
 
-#main header .logo{
-  position: absolute;
-  max-width: 40px;
-  top: 12px;
+#main header{
+  /* background: linear-gradient(to right, rgb(255, 87, 90), rgb(248, 87, 163)); */
+  background: linear-gradient(to right top, #4158D0, #5c5ff1, #17cfe7);
+  position: relative;
 }
 
 #main ul {
@@ -23,8 +27,6 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: lightgray;
-    border-radius: 1000px;
   }
   
 #main li {
@@ -32,22 +34,237 @@
   }
   
 #main li a {
+    position: relative;
     display: block;
     color: white;
     text-align: center;
-    padding: 15px 120px;
+    padding: 15px 108px;
     text-decoration: none;
+    
+    font-size: 23px;
+  }
+  
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+  .search {
+    width: 300px;
+    position: absolute;
+    left: 530px;
+    top: -18px;
+    display: flex;
+  }
+  
+  .searchTerm {
+    width: 60%;
+    border: 3px solid white;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+  
+  .searchTerm:focus{
+    color: black;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid white;
+    background: linear-gradient(to right top,#5c5ff1, #17cfe7);  
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
     font-size: 20px;
   }
   
-  /* Change the link color to #111 (black) on hover */
-#main li a:hover {
-    text-decoration: underline;
-    color: rgb(172, 4, 4);
-    cursor: pointer;
+  /*Resize the wrap to see the search bar change!*/
+  .wrapper-nav{
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
-  }
-
-.#login .loginBtn{
   
+#home .calendar table {
+    width: 80%;
+    position: absolute;
+    left: 110px;
 }
+#home .calendar table thead {
+    background: white;
+    height: 20px;
+}
+#home .calendar table thead td {
+  padding: 15px;
+}
+
+#home .calendar table tbody td {
+    border: .5px solid lightgray;
+    padding: 15px;
+    text-align: center;
+}
+
+
+#contact *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#contact .contact{
+  position: relative;
+  min-height: 100vh;
+  padding: 50px 100px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background: linear-gradient(to right top, rgb(2, 30, 107), rgb(1, 68, 131), #0202aa) */
+  background: linear-gradient(to right, #00DBDE, #FC00FF);
+}
+
+#contact .contact .content{
+  max-width: 800px;
+  text-align: center;
+
+}
+
+#contact .contact .content h2{
+  font-size: 36px;
+  font-weight: 500;
+  color: #fff;
+}
+
+#contact .contact .content h2{
+  font-weight: 300;
+  color: #fff;
+}
+
+#contact .container{
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#contact .container .contactInfo{
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+#contact .container .contactInfo .box{
+  position: relative;
+  padding: 20px 0;
+  display: flex;
+}
+
+#contact .container .contactInfo .box .icon{
+  min-width: 60px;
+  height: 60px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-size: 22px;
+}
+
+#contact .container .contactInfo .box .text{
+  display: flex;
+  margin-left: 20px;
+  font-size: 16px;
+  color: #fff;
+  flex-direction: column;
+  font-weight: 300;
+}
+
+#contact .container .contactInfo .box .text h3{
+  font-weight: 500;
+  color: #fff;
+}
+
+#contact .contactForm{
+  width: 50%;
+  padding: 40px;
+  background: #fff;
+}
+
+#contact .contactForm h2{
+  font-size: 30px;
+  color: #333;
+  font-weight: 500;
+}
+
+#contact .contactForm .inputBox{
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#contact .contactForm .inputBox input,
+#contact .contactForm .inputBox textarea
+{
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+  resize: none;
+}
+
+#contact .contactForm .inputBox span{
+  position: absolute;
+  left: 0;
+  padding: 1px 3px;
+  font-size: 14px;
+  margin: 10px 0;
+  pointer-events: none;
+  transition: 0.3s;
+  color: #666;
+}
+
+#contact .contactForm .inputBox input:focus ~ span,
+#contact .contactForm .inputBox input:valid ~ span,
+#contact .contactForm .inputBox textarea:focus ~span,
+#contact .contactForm .inputBox textarea:valid ~ span{
+  color: #e91e63;
+  font-size: 12px;
+  transform: translateY(-20px);
+}
+
+#contact .contactForm .inputBox input[type="submit"]{
+  width: 100px;
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+}
+
+@media (max-width: 991px)
+{
+  #contact .contact{
+    padding: 50px;
+  }
+  #contact .container{
+    flex-direction: column;
+  }
+  #contact .container .contactInfo{
+    margin-bottom: 40px;
+  }
+  #contact .container .contactInfo,
+  .contactForm{
+    width: 100%;
+  }
+}
+
