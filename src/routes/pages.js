@@ -19,4 +19,8 @@ router.get("/contact", function (req, res) {
     res.render('contact')
 })
 
+router.get("/setup", (req,res) => {
+    res.render("setup")
+})
+
 module.exports = router;

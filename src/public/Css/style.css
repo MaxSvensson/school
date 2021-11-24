@@ -44,9 +44,9 @@ body {
     font-size: 23px;
   }
   
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-  .search {
+.search {
     width: 300px;
     position: absolute;
     left: 530px;
@@ -54,7 +54,7 @@ body {
     display: flex;
   }
   
-  .searchTerm {
+.searchTerm {
     width: 60%;
     border: 3px solid white;
     border-right: none;
@@ -65,11 +65,11 @@ body {
     color: #9DBFAF;
   }
   
-  .searchTerm:focus{
+.searchTerm:focus{
     color: black;
   }
   
-  .searchButton {
+.searchButton {
     width: 40px;
     height: 36px;
     border: 1px solid white;
@@ -81,38 +81,81 @@ body {
     font-size: 20px;
   }
   
-  /*Resize the wrap to see the search bar change!*/
-  .wrapper-nav{
+.wrapper-nav{
     width: 30%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
+
 #home .calendar table {
     width: 80%;
     position: absolute;
     left: 110px;
 }
-#home .calendar table thead {
-    background: white;
-    height: 20px;
+
+#home .calendar tr td:first-child {
+  padding: 10px;
 }
-#home .calendar table thead td {
-  padding: 15px;
+
+#home .calendar thead td{
+  border: none;
 }
 
 #home .calendar table tbody td {
     border: .5px solid lightgray;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
 }
+
+#home .calendar p{
+  color: #1a73e8;
+  font-size: 22px;
+  transform: translateY(-90%);
+}
+
+#home .day_box {
+  /* border: none; */
+  height: 70px;
+  /* display: grid; */
+  position: relative;
+}
+
+#home .calendar .date_box{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  color: #fff;
+  background: #1a73e8;
+  width: 50px;
+  height: 50px;
+  -moz-border-radius: 70px; 
+  -webkit-border-radius: 70px; 
+  border-radius: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 30px;
+}
+
+/* #home .calendar .date_box:hover{
+  color: #fff;
+  background: #1a73e8;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 22px
+} */
 
 
 #contact *{
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -138,9 +181,10 @@ body {
   font-size: 36px;
   font-weight: 500;
   color: #fff;
+  font-family: 'Arial Narrow', Arial, sans-serif;
 }
 
-#contact .contact .content h2{
+#contact .contact .content p{
   font-weight: 300;
   color: #fff;
 }
@@ -194,6 +238,7 @@ body {
   width: 50%;
   padding: 40px;
   background: #fff;
+  border-radius: 20px;
 }
 
 #contact .contactForm h2{
@@ -205,20 +250,20 @@ body {
 #contact .contactForm .inputBox{
   position: relative;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 10px; 
 }
 
 #contact .contactForm .inputBox input,
 #contact .contactForm .inputBox textarea
 {
   width: 100%;
-  padding: 5px 10px;
+  padding: 12px 10px;
   font-size: 16px;
   margin: 10px 0;
-  border: none;
-  border-bottom: 2px solid #333;
+  /* border: none;
+  border-bottom: 2px solid #333;*/
   outline: none;
-  resize: none;
+  resize: none; 
 }
 
 #contact .contactForm .inputBox span{
@@ -249,6 +294,7 @@ body {
   cursor: pointer;
   padding: 10px;
   font-size: 18px;
+  border-radius: 10px;
 }
 
 @media (max-width: 991px)
@@ -267,4 +313,3 @@ body {
     width: 100%;
   }
 }
-

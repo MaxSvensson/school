@@ -1,193 +1,221 @@
 <div id="home">
-    
-<div class="calendar">
-
-   <table cellspacing="0">
-    <tbody>
-        <tr>
-            <td></td>
-            <td>Måndag</td>
-            <td>Tisdag</td>
-            <td>Onsdag</td>
-            <td>Torsdag</td>
-            <td>Fredag</td>
-            <td>Lördag</td>
-            <td>Söndag</td>
-        </tr>
-    </tbody>
-    <tbody>
-        <tr>
-            <td>06:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>07:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>08:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>09:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>10:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>11:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>12:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>13:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>14:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>15:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>16:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>17:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>18:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>19:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>20:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>21:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>22:00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-
-</div>
+    <div class="calendar_wrapper">
+        {{!-- <div class="empty">0</div>
+        <div class="monday">1</div>
+        <div class="tisdag">2</div>
+        <div class="onsdag">3</div>
+        <div class="torsdag"4></div>
+        <div class="fredag">5</div>
+        <div class="lordag">6</div>
+        <div class="sondag">7</div> --}}
+        <div class="calendar">
+            <table  cellspacing="0">
+                <tbody >
+                    <tr>
+                        <td style="border:none"></td>
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Mån</p>
+                            <p class="date_box">15</p>
+                        </td>
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Tis</p>
+                            <p class="date_box">16</p>
+                        </td>
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Ons</p>
+                            <p class="date_box">17</p>
+                        </td>                                                
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Tor</p>
+                            <p class="date_box">18</p>
+                        </td>
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Fre</p>
+                            <p class="date_box">19</p>
+                        </td>
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Lör</p>
+                            <p class="date_box">20</p>
+                        </td>
+                        <td style="border-left: none; border-right:none; border-top:none" class="day_box">
+                            <p>Söm</p>
+                            <p class="date_box">21</p>
+                        </td>                                                
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">06:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">07:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">08:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">09:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">10:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">11:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">12:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">13:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">14:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">15:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">16:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">17:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">18:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">19:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">20:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">21:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: none; border-right:none; border-top:none; border-bottom: none">22:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
