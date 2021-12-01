@@ -4,10 +4,34 @@
     <meta charset="utf-8">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="/Js/user.js"></script>
+    <link rel="stylesheet" href="/Css/style.css">
     <meta name="google-signin-client_id" content="548185768048-lhm3f4gpepgeq4rv4v331n7aviiansb7.apps.googleusercontent.com">
+      <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+  <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>Week planner</title>
+    <div id="main">
 </head>
 <body>
+    {{!-- <div class="circle_background"></div> --}}
+        <header>
+            <ul>
+                <li><a href="/"><i class="fas fa-home"></i></a></li>
+                <li><a href="/logout"><i class="fas fa-sign-in-alt"></i></a></li>
+                <li><a href="/settings"><i class="fas fa-cog"></i></a></li>
+                <li><a href="/contact"><i class="fas fa-phone"></i></a></li>
+                 <div class="wrapper-nav">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Sök" >
+                    <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                    </button>
+                </div>
+                </div>
+            </ul>
+        </header>
     {{{body}}}
 </body>
+</div>
 </html>

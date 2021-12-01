@@ -17,8 +17,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    accessToken: String,
-    refreshToken: String,
+    tokens: {
+        access_token : String,
+        refresh_token : String,
+        token_type : String,
+        id_token : String,
+        expiry_date : Number
+    },
     currentlyLoggedIn: {
         type: Boolean,
         default: true,
