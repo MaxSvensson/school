@@ -39,10 +39,11 @@ router.get("/google/callback", async (req, res) => {
         if(!googleUser) throw new Error("No user was found")
 
         let user = await UserService.getUser(googleUser.id);
+        
         if(!user) {
             user = new User({
                 name: googleUser.name,
-                email: googleUser.name,
+                email: googleUser.email,
                 currentlyLoggedIn: true,
                 googleId: googleUser.id,
                 tokens: googleUser.tokens
@@ -52,6 +53,8 @@ router.get("/google/callback", async (req, res) => {
                 console.log(e)
                 if(e) throw new Error("Error creating user")
             });
+        } else {
+             user.tokens = googleUser.tokens
         }
 
         const token = await UserService.CreateSessionToken(user);

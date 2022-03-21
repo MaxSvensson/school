@@ -1,21 +1,23 @@
-const { google } = require("googleapis");
 const axios = require("axios");
+const { google } = require("googleapis");
 const { DateTime } = require("luxon");
 
-
-const oauth2Client = new google.auth.OAuth2(
-  "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
-  "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",
-  "http://localhost:3000/google/callback"
-);
-
+// const setGoogleOAuthObject = (user) => {
+//     oauth2Client.setCredentials(user.tokens);
+// }
 
 const getGoogleAuthURL = () => {
+
+  const oauth2Client = new google.auth.OAuth2(
+    "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+    "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",
+    "http://localhost:3000/google/callback"
+  );
+
     /*
      * Generate a url that asks permissions to the user's email and profile
      */
-    const scopes = ['email', 'profile', 'https://www.googleapis.com/auth/calendar.events.readonly', 'https://www.googleapis.com/auth/calendar.readonly']
-
+    const scopes = ['email', 'profile', 'https://www.googleapis.com/auth/calendar.events.readonly', 'https://www.googleapis.com/auth/calendar.readonly', "https://www.googleapis.com/auth/calendar",'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.courses', 'https://www.googleapis.com/auth/classroom.coursework.me', 'https://www.googleapis.com/auth/classroom.coursework.me.readonly', 'https://www.googleapis.com/auth/classroom.coursework.students', 'https://www.googleapis.com/auth/classroom.coursework.students.readonly', 'https://www.googleapis.com/auth/classroom.announcements', 'https://www.googleapis.com/auth/classroom.announcements.readonly']
     return oauth2Client.generateAuthUrl({
       access_type: 'offline',
       prompt: 'consent',
@@ -23,12 +25,20 @@ const getGoogleAuthURL = () => {
     });
 }
 
-
 const getGoogleUser = async (code) => {
+
+  const oauth2Client = new google.auth.OAuth2(
+    "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+    "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",
+    "http://localhost:3000/google/callback"
+  );
+
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
     // getCalendar(oauth2Client)
   
+    console.log(tokens)
+
     // Fetch the user's profile with the access token and bearer
     const googleUser = await axios.get(
         `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${tokens.access_token}`,
@@ -48,58 +58,165 @@ const getGoogleUser = async (code) => {
     return googleUser;
 }
 
-const setGoogleOAuthObject = (user) => {
+const getCoursesId = async (user) => {
+  console.log(user.tokens)
+  const oauth2Client = new google.auth.OAuth2(
+    "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+    "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",
+    "http://localhost:3000/google/callback"
+  );
+
+
     oauth2Client.setCredentials(user.tokens);
+    let classroom = google.classroom({
+        version:"v1",
+        auth:oauth2Client
+    })
+    console.log((await classroom.courses.list()))
 }
 
-const getCoursesId = async () => {
-    let classroom = google.classroom({version: 'v3', auth: oauth2Client})
-}
+// function getCourseWork(user) {
 
-const getCalendarsId = async (user) => {
-    setGoogleOAuthObject(user)
+//   const oauth2Client = new google.auth.OAuth2(
+//     "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+//     "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",
+//     "http://localhost:3000/google/callback"
+//   );
+
+
+//   oauth2Client.setCredentials(user.tokens);
+//   const classroom = google.classroom({version: 'v1', auth: oauth2Client});
+//   const today = DateTime.now()
+
+//   classroom.courses.list({
+//     pageSize: 100,
+//   }, async (err, res) => {
+//     if (err) return console.error('The API returned an error: ' + err);
+
+//     const courses = res.data.courses;
+
+//     if (courses && courses.length) {
+//       let Courses = [];
+//         for (let i = 0; i < courses.length; i++) {
+//           const course = courses[i];
+//           // Fetch all coursework per course
+//           (await classroom.courses.courseWork.list({ courseId: course.id })).data.courseWork.forEach(work => {
+//             if(!work.dueDate) return;
+//             const dueDate = DateTime.fromObject(work.dueDate)
+//             if(today.startOf("day") <= dueDate.startOf("day")) {
+//               Courses.push(work);
+//             }
+//           })
+//         }
+//         console.log(Courses)
+//     } else {
+//       console.log('No courses found.');
+//     }
+//   });
+  // let coursework = []
+  // console.log(ids)
+  // ids.forEach(async (id) => {
+
+//   // })
+// }
+
+async function getCourseWork(user) {
+  
+  const oauth2Client = new google.auth.OAuth2(
+    "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+    "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",
+    "http://localhost:3000/google/callback"
+  );
+    
+    oauth2Client.setCredentials(user.tokens);
+    const classroom = google.classroom({version: 'v1', auth: oauth2Client});
+    const today = DateTime.now()
+    
     try {
-        let calendar = google.calendar({version: 'v3', auth: oauth2Client});
-        const res = await calendar.calendarList.list();
-        let ids = []
-        res.data.items.forEach(item => {
-            ids.push(item.id);
-        })
-        return ids;
+      const response = await classroom.courses.list({pageSize: 100});
+      const courses = response.data.courses;
+
+
+      const getAsyncCourseWork = async (course) => {
+          try {
+            let work = (await classroom.courses.courseWork.list({ courseId: course.id, auth: oauth2Client })).data.courseWork;
+            
+            work = work.filter(workItem => {
+              if(workItem.dueDate) {
+                const dueDate = DateTime.fromObject(workItem.dueDate)
+                if(today.startOf("day") <= dueDate.startOf("day")) {
+                  console.log(work)
+                  return workItem;
+                }
+              }
+            })
+            if(work.length < 0) return undefined
+            return work
+          } catch (error) {
+            console.log(error)
+            return undefined
+          }
+      }
+      
+      if( courses && courses.length ) {
+        const courseWork = await Promise.all(courses.map(getAsyncCourseWork));
+        // console.log(courseWork)
+        return courseWork
+      } 
+
+      return [];
+
     } catch (error) {
-        console.log(error)
-        return error
+      console.log(error)    
     }
 }
 
-const getAllWeekEvents = async (user) => {
-    try {
-        let calendar = google.calendar({version: 'v3', auth: oauth2Client});
-        const ids = await getCalendarsId(user);
-        console.log(ids)
-        let events = [];
-        for (let index = 0; index < ids.length; index++) {
-            const calendarEvents = await (await calendar.events.list({ calendarId:ids[index] })).data.items;
-            events.push(...calendarEvents);
-        }
-        // events.flat()
-        console.log(events.length)
-        events.forEach(event => {
-            if(!event.start) return
-            const jsDate = new Date(event.start.dateTime ? event.start.dateTime : event.start.date)
-            const eventDate = DateTime.fromJSDate( jsDate );
-            const dateNow = DateTime.now()
-            if(eventDate >= dateNow) {
-                // console.log(event)
-            }
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
+// const getCalendarsId = async (user) => {
+//     setGoogleOAuthObject(user)
+//     try {
+//         let calendar = google.calendar({version: 'v3', auth: oauth2Client});
+//         const res = await calendar.calendarList.list();
+//         let ids = []
+//         res.data.items.forEach(item => {
+//             ids.push(item.id);
+//         })
+//         return ids;
+//     } catch (error) {
+//         console.log(error)
+//         return error
+//     }
+// }
+
+// const getAllWeekEvents = async (user) => {
+//     try {
+//         let calendar = google.calendar({version: 'v3', auth: oauth2Client});
+//         const ids = await getCalendarsId(user);
+//         let events = [];
+//         for (let index = 0; index < ids.length; index++) {
+//             const calendarEvents = await (await calendar.events.list({ calendarId:ids[index] })).data.items;
+//             events.push(...calendarEvents);
+//         }
+//         // events.flat()
+//         console.log(events.length)
+//         events.forEach(event => {
+//             if(!event.start) return
+//             const jsDate = new Date(event.start.dateTime ? event.start.dateTime : event.start.date)
+//             const eventDate = DateTime.fromJSDate( jsDate );
+//             const dateNow = DateTime.now()
+//             if(eventDate >= dateNow) {
+//                 // console.log(event)
+//             }
+//         })
+//     } catch (error) {
+//         // console.log(error)
+//     }
+// }
 
 module.exports = {
     getGoogleAuthURL,
     getGoogleUser,
-    getAllWeekEvents
+    // getAllWeekEvents,
+    getCoursesId,
+    getCourseWork,
+    // getCalendarsId
 }
