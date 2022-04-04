@@ -7,73 +7,85 @@ const { DateTime } = require("luxon");
 // }
 
 const getGoogleAuthURL = () => {
-
   const oauth2Client = new google.auth.OAuth2(
     "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
     "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",
     "http://localhost:3000/google/callback"
   );
 
-    /*
-     * Generate a url that asks permissions to the user's email and profile
-     */
-    const scopes = ['email', 'profile', 'https://www.googleapis.com/auth/calendar.events.readonly', 'https://www.googleapis.com/auth/calendar.readonly', "https://www.googleapis.com/auth/calendar",'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.courses', 'https://www.googleapis.com/auth/classroom.coursework.me', 'https://www.googleapis.com/auth/classroom.coursework.me.readonly', 'https://www.googleapis.com/auth/classroom.coursework.students', 'https://www.googleapis.com/auth/classroom.coursework.students.readonly', 'https://www.googleapis.com/auth/classroom.announcements', 'https://www.googleapis.com/auth/classroom.announcements.readonly']
-    return oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      prompt: 'consent',
-      scope: scopes, // If you only need one scope you can pass it as string
-    });
-}
+  /*
+   * Generate a url that asks permissions to the user's email and profile
+   */
+  const scopes = [
+    "email",
+    "profile",
+    "https://www.googleapis.com/auth/calendar.events.readonly",
+    "https://www.googleapis.com/auth/calendar.readonly",
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/classroom.courses.readonly",
+    "https://www.googleapis.com/auth/classroom.courses",
+    "https://www.googleapis.com/auth/classroom.coursework.me",
+    "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.students",
+    "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+    "https://www.googleapis.com/auth/classroom.announcements",
+    "https://www.googleapis.com/auth/classroom.announcements.readonly",
+  ];
+  return oauth2Client.generateAuthUrl({
+    access_type: "offline",
+    prompt: "consent",
+    scope: scopes, // If you only need one scope you can pass it as string
+  });
+};
 
 const getGoogleUser = async (code) => {
-
   const oauth2Client = new google.auth.OAuth2(
     "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
     "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",
     "http://localhost:3000/google/callback"
   );
 
-    const { tokens } = await oauth2Client.getToken(code);
-    oauth2Client.setCredentials(tokens);
-    // getCalendar(oauth2Client)
-  
-    console.log(tokens)
+  const { tokens } = await oauth2Client.getToken(code);
+  oauth2Client.setCredentials(tokens);
+  // getCalendar(oauth2Client)
 
-    // Fetch the user's profile with the access token and bearer
-    const googleUser = await axios.get(
-        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${tokens.access_token}`,
-        {
-          headers: {
-            Authorization: `Bearer ${tokens.id_token}`,
-          },
+  console.log(tokens);
+
+  // Fetch the user's profile with the access token and bearer
+  const googleUser = await axios
+    .get(
+      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${tokens.access_token}`,
+      {
+        headers: {
+          Authorization: `Bearer ${tokens.id_token}`,
         },
-      )
-      .then(res => res.data)
-      .catch(error => {
-        throw new Error(error.message);
-      });
+      }
+    )
+    .then((res) => res.data)
+    .catch((error) => {
+      throw new Error(error.message);
+    });
 
-    googleUser.tokens = tokens
-  
-    return googleUser;
-}
+  googleUser.tokens = tokens;
+
+  return googleUser;
+};
 
 const getCoursesId = async (user) => {
-  console.log(user.tokens)
+  console.log(user.tokens);
   const oauth2Client = new google.auth.OAuth2(
     "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
     "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",
     "http://localhost:3000/google/callback"
   );
 
-
-    oauth2Client.setCredentials(user.tokens);
-    let classroom = google.classroom({
-        version:"v1",
-        auth:oauth2Client
-    })
-    console.log((await classroom.courses.list()))
-}
+  oauth2Client.setCredentials(user.tokens);
+  let classroom = google.classroom({
+    version: "v1",
+    auth: oauth2Client,
+  });
+  console.log(await classroom.courses.list());
+};
 
 // function getCourseWork(user) {
 
@@ -82,7 +94,6 @@ const getCoursesId = async (user) => {
 //     "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",
 //     "http://localhost:3000/google/callback"
 //   );
-
 
 //   oauth2Client.setCredentials(user.tokens);
 //   const classroom = google.classroom({version: 'v1', auth: oauth2Client});
@@ -113,62 +124,64 @@ const getCoursesId = async (user) => {
 //       console.log('No courses found.');
 //     }
 //   });
-  // let coursework = []
-  // console.log(ids)
-  // ids.forEach(async (id) => {
+// let coursework = []
+// console.log(ids)
+// ids.forEach(async (id) => {
 
 //   // })
 // }
 
 async function getCourseWork(user) {
-  
   const oauth2Client = new google.auth.OAuth2(
     "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
     "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",
     "http://localhost:3000/google/callback"
   );
-    
-    oauth2Client.setCredentials(user.tokens);
-    const classroom = google.classroom({version: 'v1', auth: oauth2Client});
-    const today = DateTime.now()
-    
-    try {
-      const response = await classroom.courses.list({pageSize: 100});
-      const courses = response.data.courses;
 
+  oauth2Client.setCredentials(user.tokens);
+  const classroom = google.classroom({ version: "v1", auth: oauth2Client });
+  const today = DateTime.now();
 
-      const getAsyncCourseWork = async (course) => {
-          try {
-            let work = (await classroom.courses.courseWork.list({ courseId: course.id, auth: oauth2Client })).data.courseWork;
-            
-            work = work.filter(workItem => {
-              if(workItem.dueDate) {
-                const dueDate = DateTime.fromObject(workItem.dueDate)
-                if(today.startOf("day") <= dueDate.startOf("day")) {
-                  console.log(work)
-                  return workItem;
-                }
-              }
-            })
-            if(work.length < 0) return undefined
-            return work
-          } catch (error) {
-            console.log(error)
-            return undefined
+  try {
+    const response = await classroom.courses.list({ pageSize: 100 });
+    const courses = response.data.courses;
+
+    const getAsyncCourseWork = async (course) => {
+      try {
+        let work = (
+          await classroom.courses.courseWork.list({
+            courseId: course.id,
+            auth: oauth2Client,
+          })
+        ).data.courseWork;
+        work = work.filter((workItem) => {
+          if (workItem.dueDate) {
+            const dueDate = DateTime.fromObject(workItem.dueDate);
+            // console.log({today: today.startOf("day"), dueDate: dueDate.startOf("day")})
+            if (today <= dueDate) {
+              // console.log(work)
+              return workItem;
+            }
           }
+        });
+        if (work.length < 0) return undefined;
+        return work;
+      } catch (error) {
+        // console.log(error);
+        return undefined;
       }
-      
-      if( courses && courses.length ) {
-        const courseWork = await Promise.all(courses.map(getAsyncCourseWork));
-        // console.log(courseWork)
-        return courseWork
-      } 
+    };
 
-      return [];
-
-    } catch (error) {
-      console.log(error)    
+    if (courses && courses.length) {
+      let courseWork = await Promise.all(courses.map(getAsyncCourseWork));
+      courseWork = courseWork?.filter((work) => work && work.length > 0);
+      return courseWork.flat();
     }
+
+    return [];
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // const getCalendarsId = async (user) => {
@@ -213,10 +226,10 @@ async function getCourseWork(user) {
 // }
 
 module.exports = {
-    getGoogleAuthURL,
-    getGoogleUser,
-    // getAllWeekEvents,
-    getCoursesId,
-    getCourseWork,
-    // getCalendarsId
-}
+  getGoogleAuthURL,
+  getGoogleUser,
+  // getAllWeekEvents,
+  getCoursesId,
+  getCourseWork,
+  // getCalendarsId
+};
