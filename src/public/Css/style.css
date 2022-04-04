@@ -89,182 +89,29 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
-#home .calendar table {
+
+  .container {
+    margin: auto;
     width: 80%;
-    position: absolute;
-    left: 110px;
-}
-#home .calendar table thead {
-    background: white;
-    height: 20px;
-}
-#home .calendar table thead td {
-  padding: 15px;
-}
+    top: 10%;
+  }
 
-#home .calendar table tbody td {
-    border: .5px solid lightgray;
-    padding: 15px;
-    text-align: center;
-}
-
-
-#contact *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#contact .contact{
-  position: relative;
-  min-height: 100vh;
-  padding: 50px 100px;  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* background: linear-gradient(to right top, rgb(2, 30, 107), rgb(1, 68, 131), #0202aa) */
-  background: linear-gradient(to right, #00DBDE, #FC00FF);
-}
-
-#contact .contact .content{
-  max-width: 800px;
-  text-align: center;
-
-}
-
-#contact .contact .content h2{
-  font-size: 36px;
-  font-weight: 500;
-  color: #fff;
-}
-
-#contact .contact .content h2{
-  font-weight: 300;
-  color: #fff;
-}
-
-#contact .container{
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-}
-
-#contact .container .contactInfo{
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-}
-
-#contact .container .contactInfo .box{
-  position: relative;
-  padding: 20px 0;
-  display: flex;
-}
-
-#contact .container .contactInfo .box .icon{
-  min-width: 60px;
-  height: 60px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  font-size: 22px;
-}
-
-#contact .container .contactInfo .box .text{
-  display: flex;
-  margin-left: 20px;
-  font-size: 16px;
-  color: #fff;
-  flex-direction: column;
-  font-weight: 300;
-}
-
-#contact .container .contactInfo .box .text h3{
-  font-weight: 500;
-  color: #fff;
-}
-
-#contact .contactForm{
-  width: 50%;
-  padding: 40px;
-  background: #fff;
-}
-
-#contact .contactForm h2{
+.container span{
   font-size: 30px;
-  color: #333;
-  font-weight: 500;
+  font-weight: 200;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#contact .contactForm .inputBox{
-  position: relative;
-  width: 100%;
-  margin-top: 10px;
+.container .info{
+  width: 200px;
+  height: 300px;
+  background: rgb(250, 250, 250);
+  border-radius: 20px;
 }
 
-#contact .contactForm .inputBox input,
-#contact .contactForm .inputBox textarea
-{
-  width: 100%;
-  padding: 5px 10px;
-  font-size: 16px;
-  margin: 10px 0;
-  border: none;
-  border-bottom: 2px solid #333;
-  outline: none;
-  resize: none;
+.container .info article{
+  margin-left: 70px;
+  width: 80px;
+  height: 15px;
+  background: grey;
 }
-
-#contact .contactForm .inputBox span{
-  position: absolute;
-  left: 0;
-  padding: 1px 3px;
-  font-size: 14px;
-  margin: 10px 0;
-  pointer-events: none;
-  transition: 0.3s;
-  color: #666;
-}
-
-#contact .contactForm .inputBox input:focus ~ span,
-#contact .contactForm .inputBox input:valid ~ span,
-#contact .contactForm .inputBox textarea:focus ~span,
-#contact .contactForm .inputBox textarea:valid ~ span{
-  color: #e91e63;
-  font-size: 12px;
-  transform: translateY(-20px);
-}
-
-#contact .contactForm .inputBox input[type="submit"]{
-  width: 100px;
-  background: #00bcd4;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  font-size: 18px;
-}
-
-@media (max-width: 991px)
-{
-  #contact .contact{
-    padding: 50px;
-  }
-  #contact .container{
-    flex-direction: column;
-  }
-  #contact .container .contactInfo{
-    margin-bottom: 40px;
-  }
-  #contact .container .contactInfo,
-  .contactForm{
-    width: 100%;
-  }
-}
-
