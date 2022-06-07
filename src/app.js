@@ -13,6 +13,8 @@ const hbs = exphbs.create({
   /* config */
 });
 
+require("./cron");
+
 app.use(cookieParser());
 app.use(express.json());
 app.set("views", __dirname + "/views");

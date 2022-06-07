@@ -41,8 +41,6 @@ class UserService {
         auth: user.accessToken,
         version: "v3",
       });
-
-      console.log(calender.acl.get());
     } catch (error) {}
   }
 

@@ -49,8 +49,6 @@ const getGoogleUser = async (code) => {
   oauth2Client.setCredentials(tokens);
   // getCalendar(oauth2Client)
 
-  console.log(tokens);
-
   // Fetch the user's profile with the access token and bearer
   const googleUser = await axios
     .get(
@@ -72,7 +70,6 @@ const getGoogleUser = async (code) => {
 };
 
 const getCoursesId = async (user) => {
-  console.log(user.tokens);
   const oauth2Client = new google.auth.OAuth2(
     "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
     "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",
@@ -84,7 +81,6 @@ const getCoursesId = async (user) => {
     version: "v1",
     auth: oauth2Client,
   });
-  console.log(await classroom.courses.list());
 };
 
 // function getCourseWork(user) {
@@ -158,12 +154,16 @@ async function getCourseWork(user) {
           if (workItem.dueDate) {
             const dueDate = DateTime.fromObject(workItem.dueDate);
             // console.log({today: today.startOf("day"), dueDate: dueDate.startOf("day")})
-            if (today <= dueDate) {
+            if (
+              today <= dueDate &&
+              dueDate < DateTime.now().plus({ weeks: 1 })
+            ) {
               // console.log(work)
               return workItem;
             }
           }
         });
+
         if (work.length < 0) return undefined;
         return work;
       } catch (error) {
@@ -183,6 +183,126 @@ async function getCourseWork(user) {
     console.log(error);
   }
 }
+
+const getCourses = async () => {
+  const oauth2Client = new google.auth.OAuth2(
+    "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+    "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",
+    "http://localhost:3000/google/callback"
+  );
+
+  oauth2Client.setCredentials(user.tokens);
+  const classroom = google.classroom({ version: "v1", auth: oauth2Client });
+
+  try {
+    const response = await classroom.courses.list({ pageSize: 100 });
+    const courses = response.data.courses;
+    return courses;
+  } catch (error) {
+    console.log(errpr);
+    return [];
+  }
+};
+
+const insertEvent = async (user, config) => {
+  const { id, end, start } = config;
+
+  const oauth2Client = new google.auth.OAuth2(
+    "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+    "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",
+    "http://localhost:3000/google/callback"
+  );
+
+  oauth2Client.setCredentials(user.tokens);
+
+  const calendarClient = google.calendar({
+    version: "v3",
+    auth: oauth2Client,
+  });
+
+  try {
+    const status = await calendarClient.events.insert({
+      calendarId: id,
+      sendNotifications: true,
+      requestBody: {
+        summary: "Uppgift plugga",
+        end,
+        start,
+      },
+    });
+
+    console.log(status);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getCalendar = async (user) => {
+  try {
+    const oauth2Client = new google.auth.OAuth2(
+      "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+      "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",
+      "http://localhost:3000/google/callback"
+    );
+
+    oauth2Client.setCredentials(user.tokens);
+
+    const calendarClient = google.calendar({
+      version: "v3",
+      auth: oauth2Client,
+    });
+
+    const data = await calendarClient.calendarList.list();
+
+    console.log(data.data);
+
+    return calendars;
+  } catch (error) {
+    return error;
+  }
+};
+
+const createSchoolPlannerCalendar = async (user) => {
+  try {
+    const oauth2Client = new google.auth.OAuth2(
+      "548185768048-sshoppdomogdd3knon71i8dg04c5vfeh.apps.googleusercontent.com",
+      "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",
+      "http://localhost:3000/google/callback"
+    );
+
+    oauth2Client.setCredentials(user.tokens);
+
+    const calendarClient = google.calendar({
+      version: "v3",
+      auth: oauth2Client,
+    });
+
+    const calendarList = await calendarClient.calendarList.list({});
+    const items = calendarList.data.items;
+
+    const calendarExists = items.find(
+      (calendar) => calendar.summary === "SchoolPlanner"
+    );
+
+    // console.log(calendarExists);
+
+    if (calendarExists) {
+      return calendarExists.id;
+    }
+
+    const response = await calendarClient.calendars.insert({
+      resource: {
+        summary: "SchoolPlanner",
+      },
+    });
+
+    return response.data.id;
+
+    // console.log(response);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 // const getCalendarsId = async (user) => {
 //     setGoogleOAuthObject(user)
@@ -232,4 +352,7 @@ module.exports = {
   getCoursesId,
   getCourseWork,
   // getCalendarsId
+  getCalendar,
+  createSchoolPlannerCalendar,
+  insertEvent,
 };

@@ -9,6 +9,7 @@
     "googleapis": "^89.0.0",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^2.1.1",
+    "mailgun-js": "^0.22.0",
     "mongoose": "^6.0.11",
     "node-cron": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
